@@ -31,7 +31,7 @@ const Chat = () => {
             }),
                 setMessegeList(arr)
         });
-    }, [db, activedata])
+    }, [ activedata])
     const handlemsgSend = () => {
         set(push(ref(db, 'singlemsg/')), {
             whosenderid: userdata.user.uid,
@@ -60,7 +60,7 @@ const Chat = () => {
             })
             setchatlist(arr)
         });
-    }, [activedata.id])
+    }, [activedata?.id, userdata?.user?.uid])
 
     return (
         <div className='flex flex-col justify-between xl:w-[65%] w-full h-[100%] rounded-[20px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] font-secondary px-[28px] py-[20px] '>
