@@ -6,7 +6,7 @@ import { IoEyeSharp } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 import { Link, useNavigate } from "react-router";
 import { ToastContainer, toast } from 'react-toastify';
-// import { InfinitySpin } from 'react-loader-spinner'
+import { ScaleLoader } from "react-spinners";
 import { getDatabase, ref, set } from "firebase/database";
 
 const Registration = () => {
@@ -21,7 +21,7 @@ const Registration = () => {
   const [emailErr, setEmailErr] = useState("")
   const [fullNamErr, setFullnameerr] = useState("")
   const [passwordErr, setPassworderr] = useState("")
-  // const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false)
   const handleEmail = (e) => {
     setEmail(e.target.value);
     setEmailErr("")
@@ -50,12 +50,12 @@ const Registration = () => {
 
 
     if (email && fullname && password) {
-      // setloading(true)
+      setloading(true)
       createUserWithEmailAndPassword(auth, email, password)
         .then((user) => {
           sendEmailVerification(auth.currentUser)
           toast.success("registration successfully done Please varify your email");
-          // setloading(false)
+          setloading(false)
           updateProfile(auth.currentUser, {
             displayName: fullname
           }).then(() => {
@@ -85,7 +85,7 @@ const Registration = () => {
             setPassworderr("This password is weak");
 
           }
-          // setloading(false)
+          setloading(false)
 
 
         })
@@ -134,14 +134,17 @@ const Registration = () => {
           </div>
           <div className="w-[368px] flex flex-col items-center ">
             {
-              // loading ?
-              //   (<InfinitySpin
-              //     visible={true}
-              //     width="200"
-              //     color="#000"
-              //     ariaLabel="infinity-spin-loading"
-              //   />)
-              //   :
+              loading ?
+                (<ScaleLoader
+                  visible={true}
+
+                  color="#000"
+                  height={35}
+                  width={12}
+                  radius={11}
+
+                />)
+                :
                 <button onClick={handleRegistration} className=' w-full font-semibold font-nunito text-[20px] text-white py-[20px] px-[130px] mb-[35px] bg-black rounded-[86px] mt-[20px]'>Sign up</button>
             }
 

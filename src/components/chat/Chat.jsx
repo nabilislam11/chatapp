@@ -5,6 +5,8 @@ import { FaLocationArrow } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import { getDatabase, onValue, push, ref, set } from 'firebase/database';
 import time from './time/time';
+import { MdEmojiEmotions } from 'react-icons/md';
+import EmojiPicker, { Emoji } from 'emoji-picker-react';
 const Chat = () => {
 
     const db = getDatabase();
@@ -13,13 +15,12 @@ const Chat = () => {
     const [msg, setmsg] = useState("")
     const userdata = useSelector(state => state.userinfo.value)
     const [chatlist, setchatlist] = useState([])
-
-    console.log(activedata, "acvtive");
+    const [showemoji, setshowemoji] = useState(false)
+    console.log("activedata:", activedata);
+    console.log("userdata:", userdata);
 
     useEffect(() => {
         const friendRef = ref(db, 'friend/');
-        console.log(activedata, "activeda");
-
         onValue(friendRef, (snapshot) => {
             let arr = [];
             snapshot.forEach((item) => {
@@ -31,7 +32,7 @@ const Chat = () => {
             }),
                 setMessegeList(arr)
         });
-    }, [ activedata])
+    }, [activedata])
     const handlemsgSend = () => {
         set(push(ref(db, 'singlemsg/')), {
             whosenderid: userdata.user.uid,
@@ -43,24 +44,28 @@ const Chat = () => {
         })
         setmsg("")
 
-        
+
     }
-     
+
     useEffect(() => {
         const singlemsgRef = ref(db, 'singlemsg/');
         onValue(singlemsgRef, (snapshot) => {
             let arr = []
             snapshot.forEach((item) => {
-              if ((userdata.user.uid == item.val().whosenderid && activedata.id==item.val().whoreceiverid) ||
-             (userdata.user.uid == item.val().whoreceiverid && activedata.id==item.val().whosenderid)
-            ) 
-              {
-                arr.push(item.val())
-              }
+                if ((userdata.user.uid == item.val().whosenderid && activedata.id == item.val().whoreceiverid) ||
+                    (userdata.user.uid == item.val().whoreceiverid && activedata.id == item.val().whosenderid)
+                ) {
+                    arr.push(item.val())
+                }
             })
             setchatlist(arr)
         });
-    }, [activedata?.id, userdata?.user?.uid])
+    }, [activedata?.id])
+
+    const handleEmoji = (emoji) => {
+        setmsg(msg + emoji.emoji);
+
+    }
 
     return (
         <div className='flex flex-col justify-between xl:w-[65%] w-full h-[100%] rounded-[20px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] font-secondary px-[28px] py-[20px] '>
@@ -78,7 +83,7 @@ const Chat = () => {
             </div>
 
 
-            <div className="  flex-1 flex-col overflow-auto h-[80%]">
+            <div className="  flex-1 flex-col w-full overflow-auto  h-[80%]">
                 {/* SENDER MSG  */}
                 {
                     chatlist.map((item) => (
@@ -101,18 +106,34 @@ const Chat = () => {
 
 
 
-
             </div>
+            <div className="relative ">
+
+                {
+                    showemoji && (
 
 
-            <div className=" flex justify-between mt-2.5 ">
+                        <div className="absolute bottom-20 right-0 z-50">
+                            <EmojiPicker
+                                //  reactionsDefaultOpen={true}
+                                //   allowExpandReactions={false}
+                                onEmojiClick={(emoji) => handleEmoji(emoji)} theme='dark' />
+                        </div>
+                    )
+                }
+                <div className=" flex justify-between w-full items-center  mt-2.5   ">
+                    <div className=" relative">
 
-                <input onChange={(e) =>setmsg(e.target.value) } onKeyDown={(e)=>{
-                    if (e.key=== "Enter"){
-                         handlemsgSend()
-                    }
-                } } value={msg} type="text" className=' w-[750px] rounded-[20px] py-[15px] px-[15px] border-gray-300 border-1 bg-gray-300 text-black font-secondary' placeholder='Aa' />
-                <button onClick={() => handlemsgSend()  } className='py-[15px] px-[20px]  bg-black text-white rounded-[7px]' ><FaLocationArrow /> </button>
+                        <input onChange={(e) => setmsg(e.target.value)} onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                handlemsgSend()
+                            }
+                        }} value={msg} type="text" className=' w-[750px] rounded-[20px] py-[15px] px-[15px] border-gray-300 border-1 bg-gray-300 text-black font-secondary' placeholder='Aa' />
+                        <MdEmojiEmotions onClick={() => setshowemoji(!showemoji)} className='absolute top-[15px] right-[10px]  size-5 ' />
+                    </div>
+
+                    <button onClick={() => handlemsgSend()} className='py-[15px] px-[20px]  bg-black text-white rounded-[7px]' ><FaLocationArrow /> </button>
+                </div>
             </div>
 
 

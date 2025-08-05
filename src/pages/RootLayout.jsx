@@ -9,32 +9,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
-// import { InfinitySpin } from 'react-loader-spinner';
+import { ScaleLoader } from "react-spinners";
 import { userLoginfo } from '../slice/userSlice';
 import { Outlet } from 'react-router'
 
 
 const RootLayout = () => {
-  // const [loading, setloading] = useState(true);
+  const [loading, setloading] = useState(true);
   const [verify, setVerify] = useState(false)
   const auth = getAuth();
   const userdata = useSelector(state => state.userinfo.value)
   const navigate = useNavigate()
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
   const handlemessege = () => {
 
     navigate("/messege")
   }
   // exitbutton
   const handelExit = () => {
-    // setloading(true)
+    setloading(true)
     signOut(auth).then(() => {
       localStorage.removeItem("userLoginfo")
       dispatch(userLoginfo(null))
       navigate("/registration")
 
     }).catch((error) => {
-      // setloading(false)
+      setloading(false)
 
     });
   }
@@ -51,25 +51,25 @@ const RootLayout = () => {
       if (user.emailVerified) {
         setVerify(true)
       }
-      // setloading(false)
+      setloading(false)
     }
 
 
   });
 
-  // if (loading) {
-  //   return (
-  //     <div className="flex justify-center w-full items-center h-screen  ">
-  //       <InfinitySpin
-  //         size={500}
-  //         visible={true}
-  //         color="#000"
-  //         ariaLabel="infinity-spin-loading"
-  //       />
-  //     </div>
-  //   );
-  // }
+  if (loading) {
     return (
+      <div className="flex justify-center mx-auto w-full items-center h-screen  ">
+        <ScaleLoader
+          height={70}
+          margin={3}
+          radius={12}
+          width={12}
+        />
+      </div>
+    );
+  }
+  return (
     <>
       {
         verify ?
@@ -87,7 +87,7 @@ const RootLayout = () => {
                 <div className="relative w-full group bg-transparent cursor-pointer text-black hover:text-black py-[23px] ml-[26px] rounded-l-[20px] duration-300 ease-in-out hover:bg-white overflow-hidden">
 
                   <NavLink to="/" className="relative    z-30 ">
-                     <GrHomeRounded  className="size-9  ml-[70px] transition-colors duration-300 group-hover:text-black text-white" />
+                    <GrHomeRounded className="size-9  ml-[70px] transition-colors duration-300 group-hover:text-black text-white" />
                   </NavLink>
 
 
@@ -97,7 +97,7 @@ const RootLayout = () => {
                 <div className="relative w-full group bg-transparent cursor-pointer text-black hover:text-black py-[23px] ml-[26px] rounded-l-[20px] duration-300 ease-in-out hover:bg-white overflow-hidden">
 
                   <NavLink to="/messege" className="relative    z-30 ">
-                      < FaCommentDots  className="size-9    ml-[70px] transition-colors duration-300 group-hover:text-black text-white" />
+                    < FaCommentDots className="size-9    ml-[70px] transition-colors duration-300 group-hover:text-black text-white" />
                   </NavLink>
 
 
@@ -107,7 +107,7 @@ const RootLayout = () => {
                 <div className="relative w-full group bg-transparent cursor-pointer text-black hover:text-black py-[23px] ml-[26px] rounded-l-[20px] duration-300 ease-in-out hover:bg-white overflow-hidden">
 
                   <NavLink to="settings" className="relative    z-30 ">
-                     <AiTwotoneSetting  className="size-9  ml-[70px]  transition-colors duration-300 group-hover:text-black text-white" />
+                    <AiTwotoneSetting className="size-9  ml-[70px]  transition-colors duration-300 group-hover:text-black text-white" />
                   </NavLink>
 
 
@@ -116,7 +116,7 @@ const RootLayout = () => {
 
 
 
-          
+
               </div>
               <div className=" text-white">
                 <ImExit onClick={handelExit} className=' size-10  mx-auto' />
@@ -124,7 +124,7 @@ const RootLayout = () => {
             </div>
 
             <div className="w-[80%] h-[100%] flex flex-wrap justify-start ml-[20px] gap-x-10 gap-y-3 ">
-                <Outlet></Outlet>
+              <Outlet></Outlet>
             </div>
           </div>
           :
