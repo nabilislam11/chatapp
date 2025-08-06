@@ -123,7 +123,7 @@ const Grouplist = () => {
                       <p className='font-medium font-secondary text-[14px] text-black'>{group.tagadminName}</p>
                     </div>
                   </div>
-                  <button onClick={() => handleJoint(group)} className='font-semibold font-secondary text-[20px] px-[22px] rounded-[5px] bg-black text-white mr-[32px]'>Join</button>
+                  <button onClick={() => handleJoint(group)} className='font-semibold font-secondary text-[20px] px-[22px] py-[10px] rounded-[5px] bg-gradient-to-r from-green-400 to-emerald-600 text-white mr-[32px]'>Join</button>
                 </div>
               ))
           }

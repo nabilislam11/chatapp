@@ -116,7 +116,7 @@ const Userlist = () => {
                     <BsThreeDotsVertical className=' font-semibold text-[20px] text-black ' />
 
                 </div>
-                <div className="overflow-y-scroll h-[80%] ">
+                <div className="overflow-y-scroll h-[50%] ">
                     {
                         searchuser.length > 0 ?
                             searchuser.map((item) => (
@@ -171,24 +171,24 @@ const Userlist = () => {
                                     {
                                         blocklist.includes(userdata.user.uid + item.userid) ||
                                             blocklist.includes(item.userid + userdata.user.uid) ? (
-                                            <button className='pr-[20px] '> <ImBlocked size={25} /></button>
+                                            <button className='pr-[20px] '> <ImBlocked color='red' size={25} /></button>
                                         )
                                             :
                                             friendlist.includes(userdata.user.uid + item.userid) ||
                                                 friendlist.includes(item.userid + userdata.user.uid) ? (
 
-                                                <button className='pr-[20px] '> <IoPeopleSharp size={25} /></button>
+                                                <button className='pr-[20px] '> <IoPeopleSharp className='text-[#0D6EFF] hover:text-sky-600' size={25} /></button>
                                             )
                                                 :
                                                 friendrequestlist.includes(userdata.user.uid + item.userid) ||
 
                                                     friendrequestlist.includes(item.userid + userdata.user.uid) ? (
-                                                    <button className='pr-[20px] cursor-pointer '> <FaMinusCircle size={25} /></button>
+                                                    <button className='pr-[20px] cursor-pointer '> <FaMinusCircle size={25} className='text-gray-500 hover:text-gray-600' /></button>
                                                 )
                                                     :
                                                     (
 
-                                                        <button onClick={() => handleRequest(item)} className='pr-[20px] cursor-pointer '> <BsFillPlusSquareFill size={25} /></button>
+                                                        <button onClick={() => handleRequest(item)} className='pr-[20px] cursor-pointer '> <BsFillPlusSquareFill className=' text-green-500 hover:text-green-600' size={25} /></button>
                                                     )
                                     }
                                 </div>

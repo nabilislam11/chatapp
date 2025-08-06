@@ -72,7 +72,7 @@ const Messegelist = () => {
                                     </div>
 
                                 </div>
-                                        <button onClick={() => handleMsg(item)} className='font-semibold font-secondary text-[14px] rounded-[7px] text-white bg-black py-[13px] px-[17px] '> msg</button>
+                                        <button onClick={() => handleMsg(item)} className='font-semibold font-secondary text-[14px] rounded-[7px] text-white bg-[#0D6EFF] py-[13px] px-[17px] '> msg</button>
 
                             </div>
                         ))

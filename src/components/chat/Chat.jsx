@@ -5,6 +5,7 @@ import { FaLocationArrow } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import { getDatabase, onValue, push, ref, set } from 'firebase/database';
 import time from './time/time';
+import moment from 'moment/moment';
 import { MdEmojiEmotions } from 'react-icons/md';
 import EmojiPicker, { Emoji } from 'emoji-picker-react';
 const Chat = () => {
@@ -40,7 +41,7 @@ const Chat = () => {
             whoreceiverid: activedata.id,
             whoreceivername: activedata.name,
             msg: msg,
-            time: time()
+            time:moment().format()   
         })
         setmsg("")
 
@@ -92,7 +93,7 @@ const Chat = () => {
 
                                 <h2 className=' inline-block font-normal font-secondary text-[16px]  bg-black rounded-[7px] text-white py-[12px] px-[42px] '>{item.msg}</h2>
 
-                                <h2 className='font-medium  font-secondary text-[12px]  text-black pt-[7px]   '>{item.time} </h2>
+                                <h2 className='font-medium  font-secondary text-[12px]  text-black pt-[7px]   '>{ moment(item.time).fromNow()} </h2>
                             </div>
                             :
                             <div className=" flex flex-col items-start ">
