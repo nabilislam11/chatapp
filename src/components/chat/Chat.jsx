@@ -75,7 +75,7 @@ const Chat = () => {
                 <div className=" flex justify-between items-center  gap-x-[33px] ">
                     <img className='w-[75px] h-[75px] rounded-full  ' src={profile} alt="" />
                     <div className="">
-                        <p className='font-semibold font-secondary text-[24px]  text-black'>{activedata.name} </p>
+                        <p className='font-semibold font-secondary text-[24px]  text-black'>{activedata?.name} </p>
                         <p className='font-normal  font-secondary text-[16px]  text-black' >Online</p>
                     </div>
                 </div>

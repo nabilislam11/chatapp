@@ -39,7 +39,7 @@ const Sidebar = () => {
                   
                 
                 </NavLink>
-                <NavLink to="/settings" className=" relative  after:content-[''] after:absolute after:top-0 after:left-[25px] after:rounded-l-[20px] py-5 after:bg-white  after:w-full after:h-full after:z-[-1] z-[1]  cursor-pointer before:content-[''] before:absolute before:top-0 before:right-0 before:w-[8px] before:h-full before:rounded-l-2xl before:shadow-2xl  before:bg-black before:z-[1] ">
+                <NavLink to="/setting" className=" relative  after:content-[''] after:absolute after:top-0 after:left-[25px] after:rounded-l-[20px] py-5 after:bg-white  after:w-full after:h-full after:z-[-1] z-[1]  cursor-pointer before:content-[''] before:absolute before:top-0 before:right-0 before:w-[8px] before:h-full before:rounded-l-2xl before:shadow-2xl  before:bg-black before:z-[1] ">
                   <AiTwotoneSetting className='size-9  mx-auto' />
                  
                 </NavLink>

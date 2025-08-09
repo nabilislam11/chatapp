@@ -9,6 +9,8 @@ import Home from "./pages/home";
 import RootLayout from "./pages/RootLayout";
 import Messege from "./pages/Messege";
 import React from 'react'
+import Setting from "./pages/setting";
+
 const router =createBrowserRouter([
   {
     path: "/registration",
@@ -28,6 +30,10 @@ const router =createBrowserRouter([
     {
       path: "/messege",
       element: <Messege/>,
+    },
+    {
+      path: "/setting",
+      element: <Setting/>,
     },
   ] 
   },

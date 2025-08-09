@@ -106,7 +106,7 @@ const RootLayout = () => {
 
                 <div className="relative w-full group bg-transparent cursor-pointer text-black hover:text-black py-[23px] ml-[26px] rounded-l-[20px] duration-300 ease-in-out hover:bg-white overflow-hidden">
 
-                  <NavLink to="settings" className="relative    z-30 ">
+                  <NavLink to="/setting" className="relative    z-30 ">
                     <AiTwotoneSetting className="size-9  ml-[70px]  transition-colors duration-300 group-hover:text-black text-white" />
                   </NavLink>
 
