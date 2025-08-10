@@ -53,7 +53,7 @@ const Userlist = () => {
     const handleRequest = (item) => {
         set(push(ref(db, 'friendrequest/')), {
             senderid: userdata.user.uid,
-            sendername: userdata.user.displayName,
+            sendername: userdata?.user.displayName,
             receiverid: item.userid,
             receivername: item.username,
         });

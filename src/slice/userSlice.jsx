@@ -12,11 +12,16 @@ export const userSlice = createSlice({
         state.value=action.payload
         
  
+    },
+    DisplayNameUpdate :(state,action) =>{
+      if (state.value && state.value.user) {
+        state.value.user.displayName  = action.payload   
+      }
     }
   }
 })
 
 
-export const { userLoginfo } = userSlice.actions
+export const { userLoginfo, DisplayNameUpdate } = userSlice.actions
 
 export default userSlice.reducer

@@ -7,11 +7,11 @@ const Account_settings = () => {
             <div className="p-[30px]">
                 <p className='font-semibold font-secondary text-[20px] text-black pb-[36px] '>Profile Settings</p>
                 <div className="flex flex-col gap-y-[37px] pl-[60px] ">
-                    <div className="flex gap-x-9 ">
+                    <div className="flex gap-x-9 items-center ">
                         <FaKey />
                         <p className=''>Change Password</p>
                     </div>
-                    <div className="flex gap-x-9 ">
+                    <div className="flex gap-x-9 items-center">
                         <FaTrashAlt />
                         <p className=''>Delete Account.</p>
                     </div>

@@ -8,7 +8,7 @@ const Setting = () => {
     <>
       <div className="w-[100%] h-[95vh] flex flex-col justify-start gap-x-10 gap-y-9 ">   
         <Searchinput></Searchinput>
-        <div className="flex flex-row justify-between gap-x-9">
+        <div className="flex flex-row justify-between gap-x-9 w-[100%] h-[95vh]">
           <Profile_setting/>
           <Account_settings/>
         </div>
