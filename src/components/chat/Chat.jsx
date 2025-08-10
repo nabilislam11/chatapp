@@ -9,9 +9,7 @@ import moment from 'moment/moment';
 import { MdEmojiEmotions } from 'react-icons/md';
 import EmojiPicker, { Emoji } from 'emoji-picker-react';
 const Chat = () => {
-
     const db = getDatabase();
-
     const activedata = useSelector(state => state.activedata.value)
     const [msg, setmsg] = useState("")
     const userdata = useSelector(state => state.userinfo.value)
@@ -20,20 +18,6 @@ const Chat = () => {
     console.log("activedata:", activedata);
     console.log("userdata:", userdata);
 
-    useEffect(() => {
-        const friendRef = ref(db, 'friend/');
-        onValue(friendRef, (snapshot) => {
-            let arr = [];
-            snapshot.forEach((item) => {
-                if (userdata.user.uid == item.val().receiverid ||
-                    userdata.user.uid == item.val().senderid) {
-                    arr.push({ ...item.val(), id: item.key });
-                }
-
-            }),
-                setMessegeList(arr)
-        });
-    }, [activedata])
     const handlemsgSend = () => {
         set(push(ref(db, 'singlemsg/')), {
             whosenderid: userdata.user.uid,
@@ -43,6 +27,12 @@ const Chat = () => {
             msg: msg,
             time:moment().format()   
         })
+         set(push(ref(db, 'chatNotificaion/')), {
+            whosenderid: userdata.user.uid,
+            whoreceiverid: activedata.id,
+          
+        })
+
         setmsg("")
 
 

@@ -12,19 +12,43 @@ import { signOut } from "firebase/auth";
 import { ScaleLoader } from "react-spinners";
 import { userLoginfo } from '../slice/userSlice';
 import { Outlet } from 'react-router'
+import { getDatabase, onValue, ref } from 'firebase/database';
 
 
 const RootLayout = () => {
   const [loading, setloading] = useState(true);
+  const activedata = useSelector(state => state.activedata.value)
   const [verify, setVerify] = useState(false)
   const auth = getAuth();
+  const db = getDatabase();
   const userdata = useSelector(state => state.userinfo.value)
   const navigate = useNavigate()
+  const [chatlist, setchatlist] = useState([])
   const dispatch = useDispatch();
+  console.log(chatlist);
+  
   const handlemessege = () => {
 
     navigate("/messege")
   }
+  useEffect(() => {
+          const singlemsgRef = ref(db, 'chatNotificaion/');
+          onValue(singlemsgRef, (snapshot) => {
+            
+              let arr = []
+              snapshot.forEach((item) => {
+                  if ( item.val().whoreceiverid  == userdata.user.uid )
+                   {
+                      arr.push(item.val())
+                  }
+              })
+              setchatlist(arr)
+          });
+      }, [activedata?.id])
+
+
+
+
   // exitbutton
   const handelExit = () => {
     setloading(true)
@@ -97,7 +121,10 @@ const RootLayout = () => {
                 <div className="relative w-full group bg-transparent cursor-pointer text-black hover:text-black py-[23px] ml-[26px] rounded-l-[20px] duration-300 ease-in-out hover:bg-white overflow-hidden">
 
                   <NavLink to="/messege" className="relative    z-30 ">
-                    < FaCommentDots className="size-9    ml-[70px] transition-colors duration-300 group-hover:text-black text-white" />
+                    < FaCommentDots   className="size-9 relative    ml-[70px] transition-colors duration-300 group-hover:text-black text-white" /> {
+                      chatlist.length > 0 &&
+                      <span className='flex items-center justify-center  absolute rounded-full right-[127px] top-[-8px] py-[1px] px-[10px] text-white bg-red-600 '>{chatlist.length }</span> 
+                    }
                   </NavLink>
 
 
